@@ -24,6 +24,7 @@ export default {
       ]
     }),
     replace({
+      preventAssignment: true,
       "process.env.NODE_ENV": JSON.stringify(
         production ? "production" : "development"
       ),
@@ -33,30 +34,31 @@ export default {
     resolve(),
     vue(),
     cjs(),
-    ts(),
+    ts({ abortOnError: false }),
     css({ extract: "bundle.css" }),
     production &&
-      terser({
-        module: true,
-        compress: {
-          booleans_as_integers: true,
-          drop_console: false,
-          ecma: 2018,
-          hoist_funs: true,
-          keep_fargs: false,
-          passes: 2,
-          toplevel: true,
-          unsafe_arrows: true,
-          unsafe_comps: true,
-          unsafe_Function: true,
-          unsafe_math: true,
-          unsafe_symbols: true,
-          unsafe_methods: true,
-          unsafe_proto: true,
-          unsafe_regexp: true,
-          unsafe_undefined: true
-        },
-        mangle: { module: true, toplevel: true, properties: false }
-      })
-  ]
+    terser({
+      module: true,
+      compress: {
+        booleans_as_integers: true,
+        drop_console: false,
+        ecma: 2018,
+        hoist_funs: true,
+        keep_fargs: false,
+        passes: 2,
+        toplevel: true,
+        unsafe_arrows: true,
+        unsafe_comps: true,
+        unsafe_Function: true,
+        unsafe_math: true,
+        unsafe_symbols: true,
+        unsafe_methods: true,
+        unsafe_proto: true,
+        unsafe_regexp: true,
+        unsafe_undefined: true
+      },
+      mangle: { module: true, toplevel: true, properties: false }
+    })
+  ],
+  treeshake: false
 };

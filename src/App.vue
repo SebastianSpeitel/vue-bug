@@ -1,16 +1,19 @@
 <template>
   <div>
-    <h1 v-text="message"></h1>
+    <span v-for="s in ['a', 'b']" v-text="s"></span>
   </div>
 </template>
 
-<script lang="ts">
-import { ref } from "vue";
+<script setup lang="ts">
+const message = "Hello Vue!";
+</script>
 
+<!-- Works with:   
+<script lang="ts">
 export default {
   setup() {
-    const message = ref("Hi");
-    return { message };
+    return {};
   }
 };
 </script>
+-->
